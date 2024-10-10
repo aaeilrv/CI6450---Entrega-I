@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcg5cuxw3j1b0"]
+
+[ext_resource type="Texture2D" uid="uid://vaemtrukp024" path="res://assets/green_arrow.png" id="1_pyn6y"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_imhrb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_pyn6y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vf8t5"]
+size = Vector2(44, 8)
+
+[node name="face1" type="CharacterBody2D"]
+position = Vector2(1, 1)
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 1.57079
+scale = Vector2(0.128556, 0.128556)
+sprite_frames = SubResource("SpriteFrames_imhrb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_vf8t5")

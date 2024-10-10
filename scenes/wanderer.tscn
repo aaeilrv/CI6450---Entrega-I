@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bupl38i7q7fs6"]
+
+[ext_resource type="Texture2D" uid="uid://crttx41wihc6f" path="res://assets/yellow_cursor.png" id="1_vuoka"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ejwsi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vuoka")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dj1qd"]
+radius = 2.23607
+
+[node name="second_character" type="CharacterBody2D"]
+position = Vector2(-4, -5)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 1)
+rotation = 9.94836
+scale = Vector2(0.0428101, 0.0428101)
+sprite_frames = SubResource("SpriteFrames_ejwsi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 2)
+shape = SubResource("CircleShape2D_dj1qd")

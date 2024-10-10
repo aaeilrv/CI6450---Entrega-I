@@ -1,0 +1,65 @@
+[gd_scene load_steps=12 format=3 uid="uid://coamv4bnhirfu"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_llbxm"]
+[ext_resource type="Script" path="res://scripts/wanderer.gd" id="2_j4ljp"]
+[ext_resource type="PackedScene" uid="uid://fganylavp50p" path="res://scenes/player.tscn" id="2_v6jrk"]
+[ext_resource type="PackedScene" uid="uid://ccvgnsw4wecop" path="res://scenes/wanderer.tscn" id="2_wbof8"]
+[ext_resource type="PackedScene" uid="uid://basdyb5vkgteh" path="res://scenes/basketball.tscn" id="3_fp1sc"]
+[ext_resource type="PackedScene" uid="uid://d1tt5efqnnl8u" path="res://scenes/fleeing_guy.tscn" id="6_j18fk"]
+[ext_resource type="Script" path="res://scripts/guy_who_flees.gd" id="7_736w8"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_q6jrj"]
+distance = -2.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kud87"]
+normal = Vector2(0, 1)
+distance = -1.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nc32v"]
+normal = Vector2(1, 0)
+distance = -608.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_73gm7"]
+normal = Vector2(-1, 0)
+
+[node name="game" type="Node2D"]
+script = ExtResource("1_llbxm")
+
+[node name="player" parent="." instance=ExtResource("2_v6jrk")]
+position = Vector2(295, 138)
+
+[node name="character" parent="." instance=ExtResource("3_fp1sc")]
+position = Vector2(-465, -182)
+
+[node name="wanderer" parent="." instance=ExtResource("2_wbof8")]
+visible = false
+position = Vector2(-202, 77)
+script = ExtResource("2_j4ljp")
+metadata/_edit_group_ = true
+
+[node name="fleeing_guy" parent="." instance=ExtResource("6_j18fk")]
+visible = false
+position = Vector2(314, 76)
+script = ExtResource("7_736w8")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-32, -15)
+metadata/_edit_lock_ = true
+
+[node name="walls" type="StaticBody2D" parent="."]
+position = Vector2(2, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls"]
+position = Vector2(-2, 308)
+shape = SubResource("WorldBoundaryShape2D_q6jrj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls"]
+position = Vector2(-4, -336)
+shape = SubResource("WorldBoundaryShape2D_kud87")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="walls"]
+shape = SubResource("WorldBoundaryShape2D_nc32v")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="walls"]
+position = Vector2(541, 2)
+shape = SubResource("WorldBoundaryShape2D_73gm7")

@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://coamv4bnhirfu"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_llbxm"]
+[ext_resource type="PackedScene" uid="uid://fganylavp50p" path="res://scenes/player.tscn" id="2_v6jrk"]
+[ext_resource type="PackedScene" uid="uid://basdyb5vkgteh" path="res://scenes/basketball.tscn" id="3_fp1sc"]
+[ext_resource type="PackedScene" uid="uid://bupl38i7q7fs6" path="res://scenes/second_character.tscn" id="4_a1ktj"]
+[ext_resource type="Script" path="res://scripts/second_character.gd" id="5_e5xnv"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_q6jrj"]
+distance = -2.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kud87"]
+normal = Vector2(0, 1)
+distance = -1.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nc32v"]
+normal = Vector2(1, 0)
+distance = -608.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_73gm7"]
+normal = Vector2(-1, 0)
+
+[node name="game" type="Node2D"]
+script = ExtResource("1_llbxm")
+
+[node name="player" parent="." instance=ExtResource("2_v6jrk")]
+position = Vector2(432, 0)
+
+[node name="character" parent="." node_paths=PackedStringArray("target", "self_character") instance=ExtResource("3_fp1sc")]
+position = Vector2(-507, 0)
+algorithm = 1
+target = NodePath("../player")
+self_character = NodePath(".")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-32, -15)
+metadata/_edit_lock_ = true
+
+[node name="walls" type="StaticBody2D" parent="."]
+position = Vector2(2, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls"]
+position = Vector2(-2, 308)
+shape = SubResource("WorldBoundaryShape2D_q6jrj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls"]
+position = Vector2(-4, -336)
+shape = SubResource("WorldBoundaryShape2D_kud87")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="walls"]
+shape = SubResource("WorldBoundaryShape2D_nc32v")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="walls"]
+position = Vector2(541, 2)
+shape = SubResource("WorldBoundaryShape2D_73gm7")
+
+[node name="second_character" parent="." instance=ExtResource("4_a1ktj")]
+position = Vector2(-137, -221)
+script = ExtResource("5_e5xnv")

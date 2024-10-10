@@ -1,0 +1,125 @@
+[gd_scene load_steps=12 format=3 uid="uid://coamv4bnhirfu"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_llbxm"]
+[ext_resource type="PackedScene" uid="uid://bcg5cuxw3j1b0" path="res://scenes/faces.tscn" id="2_obxrh"]
+[ext_resource type="PackedScene" uid="uid://fganylavp50p" path="res://scenes/player.tscn" id="2_v6jrk"]
+[ext_resource type="PackedScene" uid="uid://basdyb5vkgteh" path="res://scenes/character.tscn" id="3_fp1sc"]
+[ext_resource type="Script" path="res://scripts/dynamic_wander_call.gd" id="4_5rhge"]
+[ext_resource type="Script" path="res://scripts/face_call.gd" id="4_sm8mr"]
+[ext_resource type="PackedScene" uid="uid://bupl38i7q7fs6" path="res://scenes/wanderer.tscn" id="5_q87fu"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_q6jrj"]
+distance = -2.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kud87"]
+normal = Vector2(0, 1)
+distance = -1.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nc32v"]
+normal = Vector2(1, 0)
+distance = -608.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_73gm7"]
+normal = Vector2(-1, 0)
+
+[node name="game" type="Node2D"]
+script = ExtResource("1_llbxm")
+
+[node name="player" parent="." instance=ExtResource("2_v6jrk")]
+position = Vector2(327, 173)
+
+[node name="character" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_fp1sc")]
+position = Vector2(3, 4)
+algorithm = 10
+lwyg = true
+target = NodePath("../player")
+metadata/_edit_group_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-32, -15)
+metadata/_edit_lock_ = true
+
+[node name="wanderer" type="Node" parent="."]
+script = ExtResource("4_5rhge")
+visibility = true
+
+[node name="wanderer1" parent="wanderer" instance=ExtResource("5_q87fu")]
+position = Vector2(-62, -52)
+rotation = -2.87979
+metadata/_edit_group_ = true
+
+[node name="wanderer2" parent="wanderer" instance=ExtResource("5_q87fu")]
+position = Vector2(-190, 12)
+rotation = 1.309
+collision_layer = 2
+collision_mask = 2
+metadata/_edit_group_ = true
+
+[node name="wanderer3" parent="wanderer" instance=ExtResource("5_q87fu")]
+position = Vector2(-106, 93)
+collision_layer = 2
+collision_mask = 2
+metadata/_edit_group_ = true
+
+[node name="wanderer4" parent="wanderer" instance=ExtResource("5_q87fu")]
+position = Vector2(90, 88)
+rotation = -1.83259
+collision_layer = 2
+collision_mask = 2
+metadata/_edit_group_ = true
+
+[node name="wanderer5" parent="wanderer" instance=ExtResource("5_q87fu")]
+position = Vector2(128, -17)
+rotation = -1.309
+collision_layer = 2
+collision_mask = 2
+metadata/_edit_group_ = true
+
+[node name="face" type="Node" parent="."]
+script = ExtResource("4_sm8mr")
+
+[node name="face1" parent="face" instance=ExtResource("2_obxrh")]
+position = Vector2(-149, 197)
+collision_layer = 2
+collision_mask = 2
+
+[node name="face2" parent="face" instance=ExtResource("2_obxrh")]
+position = Vector2(3, -199)
+collision_layer = 2
+collision_mask = 2
+
+[node name="face3" parent="face" instance=ExtResource("2_obxrh")]
+position = Vector2(229, -6)
+collision_layer = 2
+collision_mask = 2
+
+[node name="face4" parent="face" instance=ExtResource("2_obxrh")]
+position = Vector2(144, 192)
+collision_layer = 2
+collision_mask = 2
+
+[node name="face5" parent="face" instance=ExtResource("2_obxrh")]
+position = Vector2(-245, -4)
+collision_layer = 2
+collision_mask = 2
+
+[node name="walls" type="StaticBody2D" parent="."]
+position = Vector2(2, -2)
+collision_layer = 3
+collision_mask = 3
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls"]
+position = Vector2(-2, 308)
+shape = SubResource("WorldBoundaryShape2D_q6jrj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls"]
+position = Vector2(-4, -336)
+shape = SubResource("WorldBoundaryShape2D_kud87")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="walls"]
+shape = SubResource("WorldBoundaryShape2D_nc32v")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="walls"]
+position = Vector2(541, 2)
+shape = SubResource("WorldBoundaryShape2D_73gm7")
